@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    {% if name %}    
+    
+    {% for message in get_flashed_messages() %}
+      <div class="alert alert-warning">
+        <strong>Succes!</strong>{{ message }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>      
+    {% endfor %}
+
+        <table class="table table-striped table-dark">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Nombre</th>
+              <th scope="col">Creditos</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+          {% for our_user in our_users %}
+            <tr>
+              <th scope="row">{{ our_user.codigo }}</th>
+              <td>{{ our_user.nombre }}</td>
+              <td>{{ our_user.creditos}}</td>
+              <td>
+                  <a class="btn btn-primary" href="{{url_for('update_curso', codigo=our_user.codigo)}}">Update</a>
+                  <a class="btn btn-danger" href="{{url_for('delete_curso', codigo=our_user.codigo)}}">Delete</a>
+                  <br>
+              </td>
+            </tr>
+          {% endfor %}
+          </tbody>
+      </table>         
+    {% else %}
+        <h1>Actualizar datos de {{curso.nombre}}</h1>
+        <br/>
+        <form action="/curso/update/{{curso.codigo}}" method="POST">
+            {{ form.hidden_tag() }}
+            <label for="exampleFormControlInput1" class="form-label">Nombre</label>
+            <input type="text" class="form-control" name="name" value="{{curso.nombre}}" required>
+            <br>
+            <label for="exampleFormControlTextarea1" class="form-label">Creditos</label>
+            <input type="text" class="form-control" name="creditos" value="{{curso.creditos}}" required>
+            <br/>
+            {{ form.submit() }}
+        </form>
+    {% endif %}
+{% endblock %}

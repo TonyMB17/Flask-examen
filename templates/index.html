@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+  {% for message in get_flashed_messages() %}
+    <div class="alert alert-info">
+      <strong>Succes!</strong>{{ message }}
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div> 
+  {% endfor %}
+  <h1>Sistema de Matriculas</h1>
+
+  <p>This is my first webpage!!!</p>
+
+  <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Debitis modi 
+    enim incidunt nemo aliquam. Natus accusantium, veritatis nesciunt obcaecati
+     error consequatur reprehenderit? Quasi dolorum quibusdam quis nesciunt 
+     voluptas! Aut, possimus!</p>
+
+  <p>{{ stuff|title }}</p>
+
+{% endblock %}
